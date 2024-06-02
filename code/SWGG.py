@@ -167,19 +167,3 @@ def quantile_SWGG_CP(X,Y,a,b,theta):
   
   
   
-  
-#========Utils for Color transfer    
-def SWGG_CP_color(X, Y, theta):
-    n = X.shape[0]
-
-    X_line = torch.matmul(X, theta)
-    Y_line = torch.matmul(Y, theta)
-
-    X_line_sort, u = torch.sort(X_line, axis=0)
-    Y_line_sort, v = torch.sort(Y_line, axis=0)
-    
-    W=torch.mean(torch.sum(torch.square(X[u]-Y[v]), axis=-1), axis=0)
-
-    idx=torch.argmin(W)
-    return W[idx],u[:,idx],v[:,idx]
-
